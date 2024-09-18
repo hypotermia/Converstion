@@ -24,7 +24,7 @@ The AppointmentController hosts an ASPxScheduler with a few appointments linked 
 
 Both controllers descend from a Generic BaseController which has a few helper methods to deal with the stores.
 
-##Conversion strategy and objectives 
+## Conversion strategy and objectives 
 In the Views folder, there are 2 subfolders; Home and Appointment.
 The partialviews are now using DevExpress MVC Extensions which are server-side rendered and not compatible with .NET v8.
 These cshtml files should be converted to use DevExtreme MVC components. 
