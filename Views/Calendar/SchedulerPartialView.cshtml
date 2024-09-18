@@ -1,0 +1,26 @@
+﻿@using DXMVCTestApplication.Models
+@using DXMVCTestApplication.Controllers
+
+@Html.DevExpress().Scheduler(
+    settings =>
+    {
+        settings.Name = "appointments";
+        settings.CallbackRouteValues = new { Controller = "Calendar", Action = "DXControlPartialView" };
+        settings.EditAppointmentRouteValues = new { Controller = "Calendar", Action = "EditAppointment" };
+
+        settings.Storage.Appointments.Assign(CalendarController.GetAppointmentsStorage());
+        //settings.Storage.Resources.Assign(HomeController.GetResourceStorage());
+
+        settings.Storage.EnableReminders = true;
+
+        //settings.ActiveViewType = SchedulerViewType.FullWeek;
+
+        settings.OptionsCustomization.AllowAppointmentCreate = DevExpress.XtraScheduler.UsedAppointmentType.NonRecurring;
+        settings.OptionsCustomization.AllowAppointmentEdit = DevExpress.XtraScheduler.UsedAppointmentType.NonRecurring;
+        settings.OptionsCustomization.AllowAppointmentDelete = DevExpress.XtraScheduler.UsedAppointmentType.NonRecurring;
+
+        settings.Width = Unit.Percentage(100);
+        settings.Views.DayView.Styles.ScrollAreaHeight = 400;
+        settings.Start = DateTime.Now;
+
+    }).Bind(Model).GetHtml();

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu>
+  <group Text="Views">
+    <item Text="Patients" />
+    <item Text="Calendar" NavigateUrl="Calendar" />
+  </group>
+</menu>

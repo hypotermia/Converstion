@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataBaseObjectModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a1ea6a50-7bf2-48d9-b0c2-657b1e59bf6b" namespace="DXMVCTestApplication.Models.XPO" dataBaseShemaInfo="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" generateConnectionHelper="true" generateStoredProcedures="false" fieldNameCase="Unchanged" generateDefaultConstructors="false" useNameOf="true" connectionStringName="DentalCabinet" createdInVersion="24.1.5.0" generateJsonSerializationContractResolver="false" generateServiceCollectionExtensions="false" lastModifiedInVersion="24.1.5.0" name="DentalData" xmlns="http://schemas.microsoft.com/dsltools/ORMDataModel">
+  <classes>
+    <dataBaseObjectModelHasClasses Id="33d4d52e-7fd2-4af3-a2b1-eeb43269fe4b">
+      <xpObject Id="afedc66a-d05d-4ba3-8acc-00ca08b0f8b6" name="XPAppointment" baseClass="XPObject" userFileName="XPAppointment" designerFileName="XPAppointment.Designer" className="XPAppointment" initialName="XPAppointment" persistent="Appointment" virtualName="XPAppointment">
+        <fields>
+          <generalXpObjectHasFields Id="49558e4c-89e7-46d8-9b8c-0b552aea1d27">
+            <field Id="2df94f36-fa01-4fb2-9ed5-a795f5c27e0e" name="Patient" columnType="Int64" initialName="Patient" persistent="Patient" virtualColumnType="XPPatient" logicalType="XPPatient" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="f7c7c6a7-ea42-4c3d-9cb5-b5b17b645107">
+            <field Id="e9c3e7dd-307b-4b6b-b710-b767b92ac0de" name="Date" columnType="DateTime" initialName="Date" persistent="Date" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="3fd801c0-ed2a-45b6-8275-8c15b066e653">
+            <field Id="93e78f4f-ee9c-493f-9c41-be9764007921" name="Duration" columnType="Double" initialName="Duration" persistent="Duration" virtualColumnType="Double" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="58255d68-ac71-4a8e-988b-e2626e2d61e0">
+            <field Id="89a3cd9f-e758-453b-9265-5cb0dc1bcb99" name="AllDayEvent" columnType="Boolean" initialName="AllDayEvent" persistent="AllDayEvent" virtualColumnType="Boolean" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="b9b51843-cc32-476c-8f57-885571df1cfc">
+            <field Id="d24a8774-895e-4587-800d-aa6c56f0f347" name="Comment" initialName="Comment" persistent="Comment" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+        </fields>
+        <indexes>
+          <xpObjectHasIndexes Id="13f00a78-12d5-450c-bb96-efa5b8521048">
+            <index Id="ca2e4097-2f2d-4d19-ac20-e6a727de2c6d" name="iPatient_Appointment">
+              <fieldsInIndex>
+                <indexReferencesFields Id="da16198e-2541-4c7f-8818-97fde1fcd1de">
+                  <fieldMoniker Id="2df94f36-fa01-4fb2-9ed5-a795f5c27e0e" />
+                </indexReferencesFields>
+              </fieldsInIndex>
+            </index>
+          </xpObjectHasIndexes>
+          <xpObjectHasIndexes Id="0d513dba-77ed-4fe2-90b5-e1e5434a39bb">
+            <index Id="61a4bccd-29d1-4dc3-944a-6acaa8f4fc5d" name="iAppointment_Date">
+              <fieldsInIndex>
+                <indexReferencesFields Id="fd10db02-f5b0-4f97-8ddf-08626145a571">
+                  <fieldMoniker Id="e9c3e7dd-307b-4b6b-b710-b767b92ac0de" />
+                </indexReferencesFields>
+              </fieldsInIndex>
+            </index>
+          </xpObjectHasIndexes>
+          <xpObjectHasIndexes Id="01eb2535-2d7e-4eee-93e3-20d109c332de">
+            <index Id="b7755178-2b25-4da7-8f89-6e398992a391" name="iAppointment_Patient_Date">
+              <fieldsInIndex>
+                <indexReferencesFields Id="3a971b2f-1da8-4b67-9010-4f9318f4b3fc">
+                  <fieldMoniker Id="2df94f36-fa01-4fb2-9ed5-a795f5c27e0e" />
+                </indexReferencesFields>
+                <indexReferencesFields Id="f8c1febb-60a6-4de6-a7cf-d9a820965502">
+                  <fieldMoniker Id="e9c3e7dd-307b-4b6b-b710-b767b92ac0de" />
+                </indexReferencesFields>
+              </fieldsInIndex>
+            </index>
+          </xpObjectHasIndexes>
+        </indexes>
+      </xpObject>
+    </dataBaseObjectModelHasClasses>
+    <dataBaseObjectModelHasClasses Id="b85145aa-7870-40c5-b4fd-2ecb249ceb9d">
+      <xpObject Id="98319091-aab2-4bb8-83bd-a0a7783e3a99" name="XPPatient" baseClass="XPObject" userFileName="XPPatient" designerFileName="XPPatient.Designer" className="XPPatient" initialName="XPPatient" persistent="Patient" virtualName="XPPatient">
+        <fields>
+          <generalXpObjectHasFields Id="aa2763f6-b397-4ed4-ba8a-28261f66ec9d">
+            <field Id="97a910dd-f43e-4860-8052-dffb8b34913d" name="FirstName" initialName="FirstName" persistent="FirstName" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="abb14359-dc6f-4095-97c6-c5860e594047">
+            <field Id="337139e4-f6c0-439d-864e-1c93e4dc2a54" name="LastName" initialName="LastName" persistent="LastName" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="34faceb9-cd77-4414-a066-c48715f90a3f">
+            <field Id="d46dbc2c-4e75-4185-a569-ee641cc06547" name="Birthday" columnType="DateTime" initialName="Birthday" persistent="Birthday" virtualColumnType="DateTime" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="5a27b740-a39a-4e0b-9a3f-1e5fe6b23824">
+            <field Id="f221d60e-4b74-48c8-999c-489545e84d27" name="Email" initialName="Email" persistent="Email" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="fe3b2a78-02cb-4781-bb52-95143fcff928">
+            <field Id="a1171d93-9d25-4aff-9b4c-c6006b15ade4" name="Phone" initialName="Phone" persistent="Phone" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="3bf7852f-3b93-40b9-a85d-364e53181e40">
+            <field Id="ed27548e-9d20-46c6-82c9-73848eecab26" name="Picture" columnType="Int64" initialName="Picture" persistent="Picture" virtualColumnType="XPPicture" logicalType="XPPicture" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="effb0420-aede-4861-a100-4793004126ff">
+            <field Id="91dc9587-4665-4ce4-9eca-2d3a7a35e789" name="Address" initialName="Address" persistent="Address" virtualColumnType="String" delayedUpdateModifiedOnly="false" />
+          </generalXpObjectHasFields>
+          <generalXpObjectHasFields Id="32193c1f-7967-48d5-9b68-5fe225ce8b77">
+            <persistentAlias Id="5d7a761c-5496-49e0-b08e-0318be26f280" name="FullName" virtualColumnType="String" expression="Concat(FirstName, ' ', LastName)" />
+          </generalXpObjectHasFields>
+        </fields>
+        <indexes>
+          <xpObjectHasIndexes Id="77d00bb1-ddeb-4466-a3de-1bdc3f943336">
+            <index Id="c1a13f24-ef5e-4670-9208-8a1f2dcbe41f" name="iPicture_Patient">
+              <fieldsInIndex>
+                <indexReferencesFields Id="39403b13-3ba0-4b02-bca1-19f7375453be">
+                  <fieldMoniker Id="ed27548e-9d20-46c6-82c9-73848eecab26" />
+                </indexReferencesFields>
+              </fieldsInIndex>
+            </index>
+          </xpObjectHasIndexes>
+        </indexes>
+        <aggrTarget>
+          <aggregation Id="726b5a51-ba1c-40f6-86cf-bef88aaf8d20" sourceCollectionName="Appointments" name="XPAppointmentReferencesXPPatient" targetFieldName="Patient">
+            <xpObjectMoniker Id="afedc66a-d05d-4ba3-8acc-00ca08b0f8b6" />
+          </aggregation>
+        </aggrTarget>
+        <collectionFields>
+          <xpObjectHasCollectionFields Id="40c9d694-0717-4fa2-8baa-1bdc1c7cff60">
+            <collectionField Id="96a2d062-e512-4c2d-9147-12d11c04eb58" name="Appointments" />
+          </xpObjectHasCollectionFields>
+        </collectionFields>
+      </xpObject>
+    </dataBaseObjectModelHasClasses>
+    <dataBaseObjectModelHasClasses Id="455dc851-9550-47b2-9032-9ba71bef6d13">
+      <xpObject Id="caa435b2-4eef-404f-82ef-5607ed97d71f" name="XPPicture" baseClass="XPObject" userFileName="XPPicture" designerFileName="XPPicture.Designer" className="XPPicture" initialName="XPPicture" persistent="Picture" virtualName="XPPicture">
+        <fields>
+          <generalXpObjectHasFields Id="22edc430-06dd-4acd-809a-82d1ab8d94c6">
+            <field Id="33ef332a-3b0c-4592-b73d-fddc31d3f3da" name="Image" columnType="ByteArray" initialName="Image" persistent="Image" virtualColumnType="ByteArray" delayedUpdateModifiedOnly="false" size="Unlimited" />
+          </generalXpObjectHasFields>
+        </fields>
+      </xpObject>
+    </dataBaseObjectModelHasClasses>
+  </classes>
+</dataBaseObjectModel>
