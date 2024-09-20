@@ -326,6 +326,11 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/.nuget/nuget.exe
+/lib/DevExtreme
+
+# CodeRush
+.cr/
 
 # Cake - Uncomment if you are using it
 # tools/**
