@@ -37,7 +37,21 @@ In other words:
 `@Html.DevExpress().Scheduler(...)` should be replaced with `@Html.DevExtreme().Scheduler(...)`
 
 It will be nessecary to add / modify controller endpoints for this to work.
-
+Also, the DevExtreme components ahould be bound to an Api endpoint (located in the Controllers/Api folder) like:
+`
+@(Html.DevExtreme().DataGrid<Patient>()
+        .ID("gridContainer")
+        .DataSource(d => d.WebApi().Controller("Patients")
+            .Key(nameof(Patient.Oid))
+            .LoadAction("Get")
+            .InsertAction("InsertItem")
+            .UpdateAction("UpdateItem")
+            .DeleteAction("DeleteItem"))
+        .Paging(paging => paging.Enabled(true))
+        .RemoteOperations(true)
+        //..... more config
+)
+`
 ## How to proceed:
 1. Make sure you have DevExpress ASP.NET Product v24.1.5 installed
 2. Clone this repository

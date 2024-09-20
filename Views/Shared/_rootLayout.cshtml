@@ -4,22 +4,30 @@
 <head>
     <meta charset="UTF-8" />
     <title>@ViewBag.Title</title>
+
+    @Html.DevExpress().GetStyleSheets(
+            new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+    )
+    @Html.DevExpress().GetScripts(
+            new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+            new Script { ExtensionSuite = ExtensionSuite.Editors },
+            new Script { ExtensionSuite = ExtensionSuite.GridView },
+            new Script { ExtensionSuite = ExtensionSuite.Scheduler }
+    )
+
+    @* Uncomment to use the HtmlEditor control *@
+    @* <script src="https://unpkg.com/devextreme-quill@23_2/dist/dx-quill.min.js"></script> *@
+
     
-@Html.DevExpress().GetStyleSheets(
-        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
-)
-@Html.DevExpress().GetScripts(
-        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
-        new Script { ExtensionSuite = ExtensionSuite.Editors },
-        new Script { ExtensionSuite = ExtensionSuite.GridView },
-        new Script { ExtensionSuite = ExtensionSuite.Scheduler }
-)
+    @Styles.Render("~/Content/DevExtremeBundle")    
+    @Scripts.Render("~/Scripts/DevExtremeBundle")
+
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body class="dx-viewport">
     @Html.DevExpress().Splitter(settings => {
         settings.Name = "MainSplitter";
         settings.AllowResize = false;

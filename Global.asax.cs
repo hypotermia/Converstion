@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -7,12 +7,14 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using System.Web.Optimization;
 namespace DXMVCTestApplication {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
     public class MvcApplication : System.Web.HttpApplication {
         protected void Application_Start() {
+			DevExtremeBundleConfig.RegisterBundles(BundleTable.Bundles);
 			Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
 			Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
