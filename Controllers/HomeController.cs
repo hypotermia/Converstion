@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Text.Json;
@@ -10,14 +11,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http.Results;
 using System.Web.Mvc;
-using DevExpress.Xpo;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
-using DX.Utils;
 using DXMVCTestApplication.Models;
-using DXMVCTestApplication.Models.XPO;
 using Newtonsoft.Json;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
+
 
 
 namespace DXMVCTestApplication.Controllers
@@ -45,6 +43,29 @@ namespace DXMVCTestApplication.Controllers
 		public async override Task<ActionResult> Delete(int oid)
 		{
 			return await base.Delete(oid);
+		}
+
+		// DevExtreme upgrade
+
+		[HttpGet]
+		public async override Task<ActionResult> Get(DataSourceLoadOptions loadOptions)
+		{
+			return await base.Get(loadOptions);
+		}
+		[HttpPost]
+		public async override Task<ActionResult> InsertItem(string values)
+		{
+			return await base.InsertItem(values);
+		}
+		[HttpPut]
+		public async override Task<ActionResult> UpdateItem(int key, string values)
+		{
+			return await base.UpdateItem(key, values);
+		}
+		[HttpDelete]
+		public async override Task DeleteItem(int key)
+		{
+			await base.DeleteItem(key);
 		}
 	}
 }

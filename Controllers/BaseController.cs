@@ -6,6 +6,7 @@ using DX.Data;
 using DX.Utils;
 using DXMVCTestApplication.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,24 @@ namespace DXMVCTestApplication.Controllers
 	{
 		IDataLayer DataLayer { get; }
 	}
+
+	public static class ControllerExtensions
+	{
+		public static string GetFullErrorMessage(this Controller controller, ModelStateDictionary modelState)
+		{
+			var messages = new List<string>();
+
+			foreach (var entry in modelState)
+			{
+				foreach (var error in entry.Value.Errors)
+					messages.Add(error.ErrorMessage);
+			}
+
+			return string.Join(" ", messages);
+		}
+
+	}
+
 	public class BaseController : Controller, IXpoController
 	{
 		public BaseController()
@@ -50,19 +69,11 @@ namespace DXMVCTestApplication.Controllers
 			return model;
 		}
 
-		protected string GetFullErrorMessage(ModelStateDictionary modelState)
+		protected ActionResult SendResponse(object obj, HttpStatusCode statusCode = HttpStatusCode.OK)
 		{
-			var messages = new List<string>();
-
-			foreach (var entry in modelState)
-			{
-				foreach (var error in entry.Value.Errors)
-					messages.Add(error.ErrorMessage);
-			}
-
-			return string.Join(" ", messages);
+			Response.StatusCode = (int)statusCode;
+			return Content(JsonConvert.SerializeObject(obj), "application/json");
 		}
-
 	}
 
 	public class BaseController<TMainStore, TKey, TModel> : BaseController
@@ -76,21 +87,6 @@ namespace DXMVCTestApplication.Controllers
 		{
 			MainStore = (TMainStore)Activator.CreateInstance(typeof(TMainStore), DataLayer);
 		}
-
-		//protected override void OnException(ExceptionContext filterContext)
-		//{
-		//	var err = filterContext.Exception;
-		//	var resp = filterContext.HttpContext.Response;
-		//	var req = filterContext.HttpContext.Request;
-
-		//	FluentValidation.ValidationException vEx = err as FluentValidation.ValidationException;
-
-		//	for (int i = 0; i < vEx.Errors.Count(); i++)
-		//	{
-		//	}
-
-		//	base.OnException(filterContext);
-		//}
 
 		protected IDataResult<TKey, TModel> HandleValidation(IDataResult<TKey, TModel> dataResult, TModel model)
 		{
@@ -150,6 +146,49 @@ namespace DXMVCTestApplication.Controllers
 		{
 			await MainStore.DeleteAsync(oid);
 			return await DXControlPartialView();
+		}
+
+		//DevExtreme upgrades
+		//[HttpGet]
+		public async virtual Task<ActionResult> Get(DataSourceLoadOptions loadOptions)
+		{
+			return SendResponse(await DataSourceLoader.LoadAsync(MainStore.Query(), loadOptions));
+		}
+
+		//[HttpPost]
+		public async virtual Task<ActionResult> InsertItem(string values)
+		{
+			var item = PopulateModel(new TModel(), values);
+			var result = await MainStore.CreateAsync(item);
+			if (!result.Success)
+			{
+				//var err = string.Join("<br />\r\n", result.Exception.Errors.Select(e=>e.ErrorMessage.Replace("\r\n", "<br />\r\n").ToList()));
+				var err = string.Join("\r\n", result.Exception.Errors.Select(e => e.ErrorMessage));				
+				//var err = result.Exception.Errors.First().ErrorMessage.Replace("\r", "").Split('\n');
+				return SendResponse(err, HttpStatusCode.BadRequest);
+			}
+			TKey key = MainStore.ModelKey(item);
+			return SendResponse(new { key });
+		}
+
+		//[HttpPut]
+		public async virtual Task<ActionResult> UpdateItem(TKey key, string values)
+		{
+			var item = PopulateModel(MainStore.GetByKey(key), values);
+			var result = HandleValidation(await MainStore.UpdateAsync(item), item);
+			if (!result.Success)
+			{
+				//Json prep modelerrors
+				return SendResponse(ModelState, HttpStatusCode.BadRequest);
+			}
+			return new EmptyResult();
+		}
+		
+		//[HttpDelete]
+		public async virtual Task DeleteItem(TKey key)
+		{
+			var item = MainStore.GetByKey(key);
+			var result = await MainStore.DeleteAsync(item);
 		}
 	}
 }
