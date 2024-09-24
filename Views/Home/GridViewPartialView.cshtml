@@ -17,7 +17,7 @@
         settings.Name = "PatientGrid";
         settings.KeyFieldName = nameof(Patient.Oid);
         settings.CallbackRouteValues = new { Controller = "Home", Action = "DXControlPartialView" };
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Home", Action = "AddNew" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Home", Action = "Create" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Home", Action = "Update" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Home", Action = "Delete" };
         settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;

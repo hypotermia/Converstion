@@ -4,7 +4,7 @@ Test project is a test assignement to see how much time it takes to convert DevE
 
 ## Prerequisites
 - VisualStudio 2022 Any version (not Code) With latest updates applied
-- DevExpress ASP.NET Product v24.1.5 Locally installed (Trial version is ok)
+- DevExpress ASP.NET Product v24.1.6 Locally installed (Trial version is ok)
 
 ## Quick Description of the project
 The project is a simple ASP.NET MVC 5 project with DevExpress MVC Extensions.
@@ -39,7 +39,7 @@ In other words:
 It will be nessecary to add / modify controller endpoints for this to work.
 
 ## How to proceed:
-1. Make sure you have DevExpress ASP.NET Product v24.1.5 installed
+1. Make sure you have DevExpress ASP.NET Product v24.1.6 installed
 2. Clone this repository
 3. Open the solution in Visual Studio 2022
 4. Run the project and see how it works

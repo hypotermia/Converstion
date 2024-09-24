@@ -88,12 +88,12 @@ namespace DXMVCTestApplication.Controllers
 			MainStore = (TMainStore)Activator.CreateInstance(typeof(TMainStore), DataLayer);
 		}
 
-		protected IDataResult<TKey, TModel> HandleValidation(IDataResult<TKey, TModel> dataResult, TModel model)
+		protected IDataResult<TKey, TModel> HandleValidation(IDataResult<TKey, TModel> dataResult)
 		{
-			if (!dataResult.Success)
+			if (!ModelState.IsValid || !dataResult.Success)
 			{
 				ViewData["EditError"] = string.Join("\\n", dataResult.Exception.Errors);
-				ViewData["EditableItem"] = model;
+				ViewData["EditableItem"] = dataResult.Data.LastOrDefault();
 				foreach (var error in dataResult.Exception.Errors)
 					ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
 			}
@@ -115,29 +115,13 @@ namespace DXMVCTestApplication.Controllers
 		//[HttpPost, ValidateInput(true)]
 		public async virtual Task<ActionResult> Create(TModel item)
 		{
-			if (ModelState.IsValid)
-			{
-				var result = HandleValidation(await MainStore.CreateAsync(item), item);
-			}
-			else
-			{
-				ViewData["EditError"] = "Please, correct all errors.";
-				ViewData["EditableItem"] = item;
-			}
+            var result = HandleValidation(await MainStore.CreateAsync(item));
 			return await DXControlPartialView();
 		}
 		//[HttpPost, ValidateInput(true)]
 		public async virtual Task<ActionResult> Update(TModel item)
 		{
-			if (ModelState.IsValid)
-			{
-				var result = HandleValidation(await MainStore.UpdateAsync(item), item);
-			}
-			else
-			{
-				ViewData["EditError"] = "Please, correct all errors.";
-				ViewData["EditableItem"] = item;
-			}
+			var result = HandleValidation(await MainStore.UpdateAsync(item));
 			return await DXControlPartialView();
 		}
 
@@ -159,12 +143,10 @@ namespace DXMVCTestApplication.Controllers
 		public async virtual Task<ActionResult> InsertItem(string values)
 		{
 			var item = PopulateModel(new TModel(), values);
-			var result = await MainStore.CreateAsync(item);
+			var result = HandleValidation(await MainStore.CreateAsync(item));
 			if (!result.Success)
-			{
-				//var err = string.Join("<br />\r\n", result.Exception.Errors.Select(e=>e.ErrorMessage.Replace("\r\n", "<br />\r\n").ToList()));
-				var err = string.Join("\r\n", result.Exception.Errors.Select(e => e.ErrorMessage));				
-				//var err = result.Exception.Errors.First().ErrorMessage.Replace("\r", "").Split('\n');
+			{				
+				var err = string.Join("\r\n", result.Exception.Errors.Select(e => e.ErrorMessage));								
 				return SendResponse(err, HttpStatusCode.BadRequest);
 			}
 			TKey key = MainStore.ModelKey(item);
@@ -175,11 +157,11 @@ namespace DXMVCTestApplication.Controllers
 		public async virtual Task<ActionResult> UpdateItem(TKey key, string values)
 		{
 			var item = PopulateModel(MainStore.GetByKey(key), values);
-			var result = HandleValidation(await MainStore.UpdateAsync(item), item);
+			var result = HandleValidation(await MainStore.UpdateAsync(item));
 			if (!result.Success)
 			{
-				//Json prep modelerrors
-				return SendResponse(ModelState, HttpStatusCode.BadRequest);
+                var err = string.Join("\r\n", result.Exception.Errors.Select(e => e.ErrorMessage));
+                return SendResponse(err, HttpStatusCode.BadRequest);
 			}
 			return new EmptyResult();
 		}
