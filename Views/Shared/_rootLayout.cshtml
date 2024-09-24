@@ -26,6 +26,11 @@
     @Scripts.Render("~/Scripts/DevExtremeBundle")
 
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <style>
+        .dx-datagrid-edit-popup .dx-error-message {
+            white-space: pre-line;
+        }
+    </style>
 </head>
 <body class="dx-viewport">
     @Html.DevExpress().Splitter(settings => {
