@@ -73,27 +73,6 @@
     <Reference Include="DevExtreme.AspNet.Mvc, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <HintPath>packages\DevExtreme.AspNet.Mvc.24.1.6\lib\net461\DevExtreme.AspNet.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="DX.Data, Version=23.2.3.33, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DX.Data.23.2.3.33\lib\net461\DX.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="DX.Data.Xpo, Version=23.2.3.33, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DX.Data.Xpo.23.2.3.33\lib\net461\DX.Data.Xpo.dll</HintPath>
-    </Reference>
-    <Reference Include="DX.Data.Xpo.Mapster, Version=24.1.5.31, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DX.Data.Xpo.Mapster.24.1.5.31\lib\net461\DX.Data.Xpo.Mapster.dll</HintPath>
-    </Reference>
-    <Reference Include="DX.Utils, Version=23.2.3.33, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DX.Utils.23.2.3.33\lib\net46\DX.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
-      <HintPath>packages\FluentValidation.9.5.4\lib\net461\FluentValidation.dll</HintPath>
-    </Reference>
-    <Reference Include="Mapster, Version=7.2.0.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
-      <HintPath>packages\Mapster.7.2.0\lib\net45\Mapster.dll</HintPath>
-    </Reference>
-    <Reference Include="Mapster.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e64997d676a9c1d3, processorArchitecture=MSIL">
-      <HintPath>packages\Mapster.Core.1.2.0\lib\net45\Mapster.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -536,11 +515,22 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-
   <ItemGroup>
     <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="24.1.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="DX.Data">
+      <Version>24.1.6.34</Version>
+    </PackageReference>
+    <PackageReference Include="DX.Data.Xpo">
+      <Version>24.1.6.35</Version>
+    </PackageReference>
+    <PackageReference Include="DX.Data.Xpo.Mapster">
+      <Version>24.1.6.31</Version>
+    </PackageReference>
+    <PackageReference Include="DX.Utils">
+      <Version>23.2.3.33</Version>
     </PackageReference>
   </ItemGroup>
 </Project>
