@@ -1,31 +1,26 @@
 ﻿@using DXMVCTestApplication.Models
 @using DXMVCTestApplication.Controllers
 
-@Html.DevExtreme().Scheduler(settings =>
-{
-    settings.Name = "appointments";
-    settings.CallbackRouteValues = new { Controller = "Calendar", Action = "DXControlPartialView" };
-    settings.EditAppointmentRouteValues = new { Controller = "Calendar", Action = "EditAppointment" };
-
-    settings.Storage.Appointments.Assign(CalendarController.GetAppointmentsStorage());
-
-
-    settings.Storage.EnableReminders = true;
-
-    settings.StartDate = DateTime.Now;
-    settings.Views.DayView = new DevExtreme.AspNet.Mvc.SchedulerViewSettings
+@Html.DevExpress().Scheduler(
+    settings =>
     {
-        Duration = TimeSpan.FromDays(1),
-        IntervalCount = 1,
-        CellDuration = TimeSpan.FromMinutes(30),
-        AppointmentTemplate = "AppointmentTemplate"
-    };
+        settings.Name = "appointments";
+        settings.CallbackRouteValues = new { Controller = "Calendar", Action = "DXControlPartialView" };
+        settings.EditAppointmentRouteValues = new { Controller = "Calendar", Action = "EditAppointment" };
 
+        settings.Storage.Appointments.Assign(CalendarController.GetAppointmentsStorage());
+        //settings.Storage.Resources.Assign(HomeController.GetResourceStorage());
 
-    settings.Width = Unit.Percentage(100);
-    settings.Height = 400; 
+        settings.Storage.EnableReminders = true;
 
-    settings.OptionsCustomization.AllowAppointmentCreate = true;
-    settings.OptionsCustomization.AllowAppointmentEdit = true;
-    settings.OptionsCustomization.AllowAppointmentDelete = true;
-}).Bind(Model).GetHtml()
+        //settings.ActiveViewType = SchedulerViewType.FullWeek;
+
+        settings.OptionsCustomization.AllowAppointmentCreate = DevExpress.XtraScheduler.UsedAppointmentType.NonRecurring;
+        settings.OptionsCustomization.AllowAppointmentEdit = DevExpress.XtraScheduler.UsedAppointmentType.NonRecurring;
+        settings.OptionsCustomization.AllowAppointmentDelete = DevExpress.XtraScheduler.UsedAppointmentType.NonRecurring;
+
+        settings.Width = Unit.Percentage(100);
+        settings.Views.DayView.Styles.ScrollAreaHeight = 400;
+        settings.Start = DateTime.Now;
+
+    }).Bind(Model).GetHtml();
