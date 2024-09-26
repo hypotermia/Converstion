@@ -1,10 +1,10 @@
 ﻿@using DXMVCTestApplication.Models
 @functions{
-    object GetEditingItem(ASPxGridView grid)
+    object GetEditingItem(DataSource dataSource)
     {
-        if (grid.IsNewRowEditing)
+        if (dataSource.IsNewRowEditing)
             return new Patient();
-        return grid.GetRow(grid.EditingRowVisibleIndex);
+        return dataSource.GetRow(dataSource.EditingRowVisibleIndex);
     }
 }
 
@@ -12,148 +12,89 @@
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
 
-    var grid = Html.DevExpress().GridView(settings =>
+    var dataSource = Html.DevExtreme().DataSource(ds =>
+    {
+        ds.Store(store =>
+        {
+            store.Type(DataSourceStoreType.Array);
+            store.Read(read =>
+            {
+                read.Action("GetPatients", "Home");
+            });
+            store.Insert(insert =>
+            {
+                insert.Action("Create", "Home");
+            });
+            store.Update(update =>
+            {
+                update.Action("Update", "Home");
+            });
+            store.Remove(remove =>
+            {
+                remove.Action("Delete", "Home");
+            });
+        });
+    });
+
+    var grid = Html.DevExtreme().DataGrid(settings =>
     {
         settings.Name = "PatientGrid";
-        settings.KeyFieldName = nameof(Patient.Oid);
-        settings.CallbackRouteValues = new { Controller = "Home", Action = "DXControlPartialView" };
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Home", Action = "Create" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Home", Action = "Update" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Home", Action = "Delete" };
-        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
-        settings.SettingsBehavior.ConfirmDelete = true;
-        settings.SettingsEditing.ShowModelErrorsForEditors = true;
-        settings.Styles.EditingErrorRow.CssClass = "dx-error-row";
-        settings.Width = Unit.Percentage(100);
-
-        settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
-        settings.CommandColumn.ShowDeleteButton = true;
-        settings.CommandColumn.ShowEditButton = true;
-
-        settings.Columns.Add(nameof(Patient.FullName));
-        settings.Columns.Add(nameof(Patient.Phone));
-        settings.Columns.Add(nameof(Patient.Address));
-        settings.Columns.Add(nameof(Patient.Birthday), MVCxGridViewColumnType.DateEdit);
-        settings.Columns.Add(nameof(Patient.LastVisit), MVCxGridViewColumnType.DateEdit);
-        settings.Columns.Add(nameof(Patient.NextVisit), MVCxGridViewColumnType.DateEdit);
-        
-        settings.SetEditFormTemplateContent(c =>
+        settings.DataSource(dataSource);
+        settings.KeyField("Oid");
+        settings.Columns.Add(column =>
         {
-            using (Html.BeginForm())
-            {
-                Html.DevExpress().FormLayout(flSettings =>
-                {
-                    flSettings.Name = "FormLayoutProducts";
-                    flSettings.Width = Unit.Percentage(100);
-                    flSettings.RequiredMarkDisplayMode = RequiredMarkMode.RequiredOnly;
-                    flSettings.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
-                    flSettings.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 700;
-                    flSettings.ColCount = 2;
-
-                    flSettings.Items.Add(i =>
-                    {
-                        i.FieldName = nameof(Patient.FirstName);
-                        i.NestedExtension().TextBox(s =>
-                        {
-                            s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
-                            s.Properties.ValidationSettings.Display = Display.Static;
-                            s.ShowModelErrors = true;
-                            s.Width = Unit.Percentage(100);
-                        });
-                    });
-                    flSettings.Items.Add(i =>
-                    {
-                        i.FieldName = nameof(Patient.LastName);
-                        i.NestedExtension().TextBox(s =>
-                        {
-                            s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
-                            s.Properties.ValidationSettings.Display = Display.Static;
-                            s.ShowModelErrors = true;
-                            s.Width = Unit.Percentage(100);
-                        });
-                    });
-                    flSettings.Items.Add(i =>
-                    {
-                        i.FieldName = nameof(Patient.Address);
-                        //i.ColumnSpan = 2;
-                        i.NestedExtension().TextBox(s =>
-                        {
-                            s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
-                            s.Properties.ValidationSettings.Display = Display.Static;
-                            s.ShowModelErrors = true;
-                            s.Width = Unit.Percentage(100);
-                        });
-                    });
-                    flSettings.Items.Add(i =>
-                    {
-                        i.FieldName = nameof(Patient.Birthday);
-                        i.NestedExtension().DateEdit(s =>
-                        {
-                            s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
-                            s.Properties.ValidationSettings.Display = Display.Static;
-                            s.ShowModelErrors = true;
-                            s.Width = Unit.Percentage(100);
-                        });
-                    });
-                    flSettings.Items.Add(i =>
-                    {
-                        i.FieldName = nameof(Patient.Email);
-                        i.NestedExtension().TextBox(s =>
-                        {
-                            s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
-                            s.Properties.ValidationSettings.Display = Display.Static;
-                            s.ShowModelErrors = true;
-                            s.Width = Unit.Percentage(100);
-                        });
-                    });
-                    flSettings.Items.Add(i =>
-                    {
-                        i.FieldName = nameof(Patient.Phone);
-
-                        i.NestedExtension().TextBox(s =>
-                        {
-                            s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
-                            s.Properties.ValidationSettings.Display = Display.Static;
-                            s.ShowModelErrors = true;
-                            s.Width = Unit.Percentage(100);
-                        });
-                    });
-
-                    flSettings.Items.AddEmptyItem();
-                    flSettings.Items.Add(i =>
-                    {
-                        i.ShowCaption = DefaultBoolean.False;
-                        i.ColumnSpan = 2;
-                    }).SetNestedContent(() =>
-                    {
-                        ViewContext.Writer.Write("<div style='float:right'>");
-                        Html.DevExpress().Button(btnSettings =>
-                        {
-                            btnSettings.Name = "btnUpdate";
-                            btnSettings.Text = "Update";
-                            btnSettings.ClientSideEvents.Click = "function(s, e){ PatientGrid.UpdateEdit(); }";
-                        }).Render();
-                        Html.DevExpress().Button(btnSettings =>
-                        {
-                            btnSettings.Name = "btnCancel";
-                            btnSettings.Text = "Cancel";
-                            btnSettings.Style[HtmlTextWriterStyle.MarginLeft] = "5px";
-                            btnSettings.ClientSideEvents.Click = "function(s, e){ PatientGrid.CancelEdit(); }";
-                        }).Render();
-                        ViewContext.Writer.Write("</div>");
-                    });
-
-                    //===
-                }).Bind(ViewData["EditableItem"] ?? GetEditingItem(c.Grid)).Render();
-            }
+            column.DataField(nameof(Patient.FullName));
+            column.DataField(nameof(Patient.Phone));
+            column.DataField(nameof(Patient.Address));
+            column.DataField(nameof(Patient.Birthday));
+            column.DataField(nameof(Patient.LastVisit));
+            column.DataField(nameof(Patient.NextVisit));
         });
-
-        //DevExpress.Web.Demos.GridViewFeaturesHelper.SetupGlobalGridViewBehavior(settings);
+        settings.Editable(editable =>
+        {
+            editable.Mode(GridEditMode.Popup);
+            editable.AllowAdding(true);
+            editable.AllowUpdating(true);
+            editable.AllowDeleting(true);
+        });
     });
-    if (ViewData["EditError"] != null)
-    {
-        grid.SetEditErrorText(((string)ViewData["EditError"]).Replace("\r\n", "<br />\r\n"));
-    }
+
+    // Menampilkan Grid
+    @grid.GetHtml()
 }
-@grid.Bind(Model).GetHtml()
+
+@Html.DevExtreme().Popup(settings =>
+{
+    settings.Title("Edit Patient");
+    settings.Shown("function() { $('#PatientGrid').dxDataGrid('getDataSource').reload(); }");
+    settings.ContentTemplate(() =>
+    {
+        Html.DevExtreme().Form(formSettings =>
+        {
+            formSettings.Items.Add(i =>
+            {
+                i.DataField(nameof(Patient.FirstName));
+            });
+            formSettings.Items.Add(i =>
+            {
+                i.DataField(nameof(Patient.LastName));
+            });
+            formSettings.Items.Add(i =>
+            {
+                i.DataField(nameof(Patient.Address));
+            });
+            formSettings.Items.Add(i =>
+            {
+                i.DataField(nameof(Patient.Birthday));
+            });
+            formSettings.Items.Add(i =>
+            {
+                i.DataField(nameof(Patient.Email));
+            });
+            formSettings.Items.Add(i =>
+            {
+                i.DataField(nameof(Patient.Phone));
+            });
+        }).Render();
+    });
+}).Render();

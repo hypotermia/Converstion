@@ -45,14 +45,23 @@ namespace DXMVCTestApplication.Controllers
 			return await base.Delete(oid);
 		}
 
-		// DevExtreme upgrade
+        // DevExtreme upgrade
 
-		[HttpGet]
-		public async override Task<ActionResult> Get(DataSourceLoadOptions loadOptions)
-		{
-			return await base.Get(loadOptions);
-		}
-		[HttpPost]
+        [HttpGet]
+        public async override Task<ActionResult> Get(DataSourceLoadOptions loadOptions)
+        {
+            try
+            {
+                var data = await base.Get(loadOptions);
+                return data; 
+            }
+            catch (Exception ex)
+            {
+                
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+        [HttpPost]
 		public async override Task<ActionResult> InsertItem(string values)
 		{
 			return await base.InsertItem(values);
