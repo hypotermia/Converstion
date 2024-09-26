@@ -1,26 +1,31 @@
 ﻿@using DXMVCTestApplication.Models
 @using DXMVCTestApplication.Controllers
 
-@Html.DevExpress().Scheduler(
-    settings =>
+@Html.DevExtreme().Scheduler(settings =>
+{
+    settings.Name = "appointments";
+    settings.CallbackRouteValues = new { Controller = "Calendar", Action = "DXControlPartialView" };
+    settings.EditAppointmentRouteValues = new { Controller = "Calendar", Action = "EditAppointment" };
+
+    settings.Storage.Appointments.Assign(CalendarController.GetAppointmentsStorage());
+
+
+    settings.Storage.EnableReminders = true;
+
+    settings.StartDate = DateTime.Now;
+    settings.Views.DayView = new DevExtreme.AspNet.Mvc.SchedulerViewSettings
     {
-        settings.Name = "appointments";
-        settings.CallbackRouteValues = new { Controller = "Calendar", Action = "DXControlPartialView" };
-        settings.EditAppointmentRouteValues = new { Controller = "Calendar", Action = "EditAppointment" };
+        Duration = TimeSpan.FromDays(1),
+        IntervalCount = 1,
+        CellDuration = TimeSpan.FromMinutes(30),
+        AppointmentTemplate = "AppointmentTemplate"
+    };
 
-        settings.Storage.Appointments.Assign(CalendarController.GetAppointmentsStorage());
-        //settings.Storage.Resources.Assign(HomeController.GetResourceStorage());
 
-        settings.Storage.EnableReminders = true;
+    settings.Width = Unit.Percentage(100);
+    settings.Height = 400; 
 
-        //settings.ActiveViewType = SchedulerViewType.FullWeek;
-
-        settings.OptionsCustomization.AllowAppointmentCreate = DevExpress.XtraScheduler.UsedAppointmentType.NonRecurring;
-        settings.OptionsCustomization.AllowAppointmentEdit = DevExpress.XtraScheduler.UsedAppointmentType.NonRecurring;
-        settings.OptionsCustomization.AllowAppointmentDelete = DevExpress.XtraScheduler.UsedAppointmentType.NonRecurring;
-
-        settings.Width = Unit.Percentage(100);
-        settings.Views.DayView.Styles.ScrollAreaHeight = 400;
-        settings.Start = DateTime.Now;
-
-    }).Bind(Model).GetHtml();
+    settings.OptionsCustomization.AllowAppointmentCreate = true;
+    settings.OptionsCustomization.AllowAppointmentEdit = true;
+    settings.OptionsCustomization.AllowAppointmentDelete = true;
+}).Bind(Model).GetHtml()
